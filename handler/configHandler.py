@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
--------------------------------------------------
-   File Name：     configHandler
-   Description :
-   Author :        JHao
-   date：          2020/6/22
--------------------------------------------------
-   Change Activity:
-                   2020/6/22:
--------------------------------------------------
-"""
-__author__ = 'JHao'
+
 
 import os
 import setting
@@ -20,7 +9,6 @@ from util.six import reload_six, withMetaclass
 
 
 class ConfigHandler(withMetaclass(Singleton)):
-
     def __init__(self):
         pass
 
@@ -80,4 +68,3 @@ class ConfigHandler(withMetaclass(Singleton)):
     @LazyProperty
     def timezone(self):
         return os.getenv("TIMEZONE", setting.TIMEZONE)
-

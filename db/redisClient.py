@@ -1,18 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
------------------------------------------------------
-   File Name：     redisClient.py
-   Description :   封装Redis相关操作
-   Author :        JHao
-   date：          2019/8/9
-------------------------------------------------------
-   Change Activity:
-                   2019/08/09: 封装Redis相关操作
-                   2020/06/23: 优化pop方法, 改用hscan命令
-                   2021/05/26: 区别http/https代理
-------------------------------------------------------
-"""
-__author__ = 'JHao'
+
+
 
 from redis.exceptions import TimeoutError, ConnectionError, ResponseError
 from redis.connection import BlockingConnectionPool
@@ -42,10 +30,11 @@ class RedisClient(object):
         """
         self.name = ""
         kwargs.pop("username")
-        self.__conn = Redis(connection_pool=BlockingConnectionPool(decode_responses=True,
-                                                                   timeout=5,
-                                                                   socket_timeout=5,
-                                                                   **kwargs))
+        self.__conn = Redis(
+            connection_pool=BlockingConnectionPool(
+                decode_responses=True, timeout=5, socket_timeout=5, **kwargs
+            )
+        )
 
     def get(self, https):
         """
@@ -128,7 +117,10 @@ class RedisClient(object):
         :return:
         """
         proxies = self.getAll(https=False)
-        return {'total': len(proxies), 'https': len(list(filter(lambda x: json.loads(x).get("https"), proxies)))}
+        return {
+            "total": len(proxies),
+            "https": len(list(filter(lambda x: json.loads(x).get("https"), proxies))),
+        }
 
     def changeTable(self, name):
         """
@@ -139,17 +131,15 @@ class RedisClient(object):
         self.name = name
 
     def test(self):
-        log = LogHandler('redis_client')
+        log = LogHandler("redis_client")
         try:
             self.getCount()
         except TimeoutError as e:
-            log.error('redis connection time out: %s' % str(e), exc_info=True)
+            log.error("redis connection time out: %s" % str(e), exc_info=True)
             return e
         except ConnectionError as e:
-            log.error('redis connection error: %s' % str(e), exc_info=True)
+            log.error("redis connection error: %s" % str(e), exc_info=True)
             return e
         except ResponseError as e:
-            log.error('redis connection error: %s' % str(e), exc_info=True)
+            log.error("redis connection error: %s" % str(e), exc_info=True)
             return e
-
-

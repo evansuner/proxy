@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
--------------------------------------------------
-   File Name：     testDbClient
-   Description :
-   Author :        JHao
-   date：          2020/6/23
--------------------------------------------------
-   Change Activity:
-                   2020/6/23:
--------------------------------------------------
-"""
-__author__ = 'JHao'
+
 
 from db.dbClient import DbClient
 
@@ -35,5 +24,5 @@ def testDbClient():
     print("DbClient ok!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     testDbClient()

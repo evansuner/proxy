@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
--------------------------------------------------
-   File Name：     testProxyValidator
-   Description :
-   Author :        JHao
-   date：          2021/5/25
--------------------------------------------------
-   Change Activity:
-                   2021/5/25:
--------------------------------------------------
-"""
-__author__ = 'JHao'
+
 
 from helper.validator import ProxyValidator
 
@@ -24,5 +13,5 @@ def testProxyValidator():
         print(_)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     testProxyValidator()

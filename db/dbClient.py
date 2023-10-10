@@ -1,18 +1,6 @@
 # -*- coding: utf-8 -*-
-# !/usr/bin/env python
-"""
--------------------------------------------------
-   File Name：    DbClient.py
-   Description :  DB工厂类
-   Author :       JHao
-   date：          2016/12/2
--------------------------------------------------
-   Change Activity:
-                   2016/12/02:   DB工厂类
-                   2020/07/03:   取消raw_proxy储存
--------------------------------------------------
-"""
-__author__ = 'JHao'
+
+
 
 import os
 import sys
@@ -79,12 +67,14 @@ class DbClient(withMetaclass(Singleton)):
             __type = "redisClient"
         else:
             pass
-        assert __type, 'type error, Not support DB type: {}'.format(self.db_type)
-        self.client = getattr(__import__(__type), "%sClient" % self.db_type.title())(host=self.db_host,
-                                                                                     port=self.db_port,
-                                                                                     username=self.db_user,
-                                                                                     password=self.db_pwd,
-                                                                                     db=self.db_name)
+        assert __type, "type error, Not support DB type: {}".format(self.db_type)
+        self.client = getattr(__import__(__type), "%sClient" % self.db_type.title())(
+            host=self.db_host,
+            port=self.db_port,
+            username=self.db_user,
+            password=self.db_pwd,
+            db=self.db_name,
+        )
 
     def get(self, https, **kwargs):
         return self.client.get(https, **kwargs)
